@@ -25,6 +25,7 @@ npx playwright test tests/merchant/deneme.spec.ts --headed
 
 ```bash
 npx playwright codegen https://www.google.com/
+---
 
 Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locater parametrelerini gösterir.
 
