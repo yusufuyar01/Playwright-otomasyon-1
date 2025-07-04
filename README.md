@@ -62,8 +62,7 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
     - `509-tuzel-mukellef-ekleme.spec.ts` 
     - `509-gercek-mukellef-ekleme.spec.ts` 
     - `detay-payment-type-ekleme.spec.ts` 
-    - `detay-e-belge-ekleme.spec.ts` 
- 
+    - `detay-e-belge-ekleme.spec.ts`  
 
 !!! 507/509 mükellef ekleme gerek duyulmadı
 !!! payment mediator (Ödeme Aracıları) uzun süreceğinden yapılmadı
