@@ -194,8 +194,6 @@ test('509 Tüzel Mükellef Ekleme Testleri', async ({ page }) => {
      try {
        const basariMesaji = page.locator('.swal2-success-ring');
        await basariMesaji.waitFor();
-      //  const elementSayisi = await basariMesaji.isVisible();
-      //  console.log('Element sayısı:', elementSayisi);
        if (basariMesaji) {
          console.log('✅ Başarılı: Üye İşyeri başarıyla eklendi! (509-Tüzel Mükellef)');
        } else {

@@ -28,184 +28,203 @@ test('Deneme', async ({ page }) => {
   await uyeIsyeri.click();
   await page.waitForTimeout(500);
 
-
-  // ===== ADIM 3: Yeni Üye İşyeri Ekleme =====
-  // Yeni üye işyeri ekleme butonunu bul ve tıkla
-  const yeniUyeIsyeri = page.locator('text="Yeni Ekle"'); 
-  await yeniUyeIsyeri.click();
+  // ===== ADIM 3: Detay Menü =====
+  // Detay menüye tıkla tıkla (ilk satır)
+  const firstRowExpand = page.locator('tr').nth(1).locator('.k-hierarchy-cell').first();
+  await firstRowExpand.click();
   await page.waitForTimeout(1000);
 
 
-  // ===== ADIM 4: Üye İşyeri Ekleme Formu Doldurulması =====
+  /*
+  // "ödeme tipleri" tıklama 
+  const odemeTipleri = page.getByText('Ödeme Tipleri');
+  await odemeTipleri.click();
+  await page.waitForTimeout(1000);
 
-  // Vergi Tipi seçimi
-  const taxType = page.locator('ot-data-entry-template').filter({ hasText: 'Vergi Tipi' }).locator('span').first();
-  await taxType.click();
+  //"Yeni" butonu
+  const yeniButton = page.getByRole('button', { name: '+ Yeni' });
+  await yeniButton.click();
+  await page.waitForTimeout(1000);
 
-  // Varsayılan zaten tüzelde fakat gerçek için de tıklanıyor. Bu yüzden göstermek istedim.
-  const taxTypeOption = page.getByRole('option').getByText('Tüzel');
-  await taxTypeOption.click();
-
- 
-  // ===== ADIM 5: Vergi Dairesi Seçimi =====
-  // Kendo searchbar combobox'ına tıkla
-  const vergiDairesiCombobox = page.locator('kendo-searchbar').getByRole('combobox');
-  await vergiDairesiCombobox.click();
-
-
-  // "baş" yaz
-  await vergiDairesiCombobox.fill('baş');
+  // ===== ADIM 4: Ödeme Tipi Ekleme =====
+  // Ödeme Tipi dropdown'ına tıkla
+  const odemeTipiDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Ödeme Tipi' }).locator('span').first();
+  await odemeTipiDropdown.click();
   await page.waitForTimeout(500);
 
-  // "Başkent Vergi Dairesi" seçeneğine tıkla
-  const baskVergiDairesi = page.getByText('Başkent Vergi Dairesi');
-  await baskVergiDairesi.click();
+  // Kesin belirli bir seçenek seçemeyiz, kullanılmış bir seçenek yazılırsa dropdownda gözükmeyeceğinden seçme işlemi olmayacaktır. 
+  const options = await page.getByRole('option').all();
+  // Rastgele bir seçenek seç
+  const randomOption = options[Math.floor(Math.random() * options.length)]; 
+  await randomOption.click();
+  await page.waitForTimeout(500);
 
+  // "Oluştur" butonuna tıkla
+  const olusturButton = page.getByRole('button', { name: 'Oluştur' });
+  await olusturButton.click();
+  console.log('✅ Başarılı: Ödeme Tipi eklendi!');
+  await page.waitForTimeout(1000);
 
-   // VKN üret
-   const vkn = await vknUret(page);
-   console.log('Üretilen VKN:', vkn);
- 
-   // VKN alanına yaz
-   const vknInput = page.locator('ot-data-entry-template').filter({ hasText: 'VKN'}).getByRole('textbox');
-   await vknInput.fill(vkn);
+  */
 
+    // ===== ADIM 4: Ödeme Aracıları Ekleme =====
+  // "ödeme Aracıları" tıklama 
+  const odemeAracilari = page.getByText('Ödeme Aracıları');
+  await odemeAracilari.click();
+  await page.waitForTimeout(1000);
 
-   // Üye iş yeri adı , üye iş yeri kısa ad doldurulması
-   const isyeriAdi = rastgeleString(10);
-   const isyeriAdiInput = page.locator('ot-data-entry-template').filter({ hasText: 'Üye İşyeri Ad'}).getByRole('textbox');
-   await isyeriAdiInput.fill(isyeriAdi);
-   const isyeriKisaAdiInput = page.locator('ot-data-entry-template').filter({ hasText: 'Üye İşyeri Kısa Ad'}).getByRole('textbox');
-   await isyeriKisaAdiInput.fill(isyeriAdi);
+  //"Yeni" butonu
+  const yeniButton = page.getByRole('button', { name: '+ Yeni' });
+  await yeniButton.click();
+  await page.waitForTimeout(1000);  
 
+  // "Terminal tipi" seçimi
+  const terminalTipi = page.locator('ot-data-entry-template').filter({ hasText: 'Terminal Tipi' }).locator('span').first();
+  await terminalTipi.click();
+  await page.waitForTimeout(500);
 
-   // "Sektör" tıkla
-   const sektorDropdown = page.getByText('Seçiniz...').first();
-   await sektorDropdown.click();
+  // Rastgele bir seçenek seç
+  const options2 = await page.getByRole('option').all();
+  const randomOption2 = options2[Math.floor(Math.random() * options2.length)];
+  await randomOption2.click();
+  await page.waitForTimeout(500);
 
-   // "bakkal" seçeneğini seç
-   const bakkall1Option = page.getByRole('option', { name: 'DENEME' });
-   await bakkall1Option.click();
+  // // "POS" seçeneğini seç
+  // const posOption = page.getByRole('option', { name: 'POS' });
+  // await posOption.click();
+  // await page.waitForTimeout(500);
 
+  // "Ödeme Aracısı" seçimi
+  const odemeAracisi = page.locator('ot-data-entry-template').filter({ hasText: 'Ödeme Aracısı' }).locator('span').first();
+  await odemeAracisi.click();
+  await page.waitForTimeout(500);
 
-   // "Tip" tıkla
-   const tip = page.locator('ot-data-entry-template').filter({ hasText: /^Tip$/ }).getByLabel('Select').first();
-   await tip.click();
+  // Rastgele bir seçenek seç
+  const options3 = await page.getByRole('option').all();
+  const randomOption3 = options3[Math.floor(Math.random() * options3.length)];
+  await randomOption3.click();
+  await page.waitForTimeout(500);
 
-   // "509-Mükellefi" seçeneğini seç
-   const mukellefOption = page.getByRole('option', { name: '509-Mükellefi', exact: true });
-   await mukellefOption.click();
+  // Textbox'a tıkla ve "1234" yaz
+  const textbox = page.getByRole('textbox');
+  await textbox.click();
+  await textbox.fill('1234');
+  await page.waitForTimeout(500);
 
+  // "Oluştur" butonuna tıkla
+  const olusturButton = page.getByRole('button', { name: 'Oluştur' });
+  await olusturButton.click();
 
-   // "Durum" dropdown'ına tıkla
-   const durumDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Durum' }).locator('span').first();
-   await durumDropdown.click();
+  // // Popup mesajlarını yakalamak için gelişmiş sistem
+  // console.log('🔍 Popup mesajı aranıyor...');
+  
+  // try {
+  //   // Farklı popup türlerini kontrol et
+  //   const popupSelectors = [
+  //     '.swal2-popup',
+  //     '.modal',
+  //     '[role="dialog"]',
+  //     '.toast',
+  //     '.notification',
+  //     '.alert'
+  //   ];
 
-   // "Başlangıç" seçeneğini seç
-   const baslangicOption = page.getByRole('option', { name: 'Başlangıç' });
-   await baslangicOption.click();
-
-   // "Tercih Edilen Dil" dropdown'ına tıkla
-   const tercihEdilenDil = page.locator('ot-data-entry-template').filter({ hasText: 'Tercih Edilen Dil' }).locator('span').nth(1);
-   await tercihEdilenDil.click();
-
-   // "Türkçe" seçeneğini seç
-   const turkceOption = page.getByRole('option', { name: 'Türkçe' });
-   await turkceOption.click();
-
-   // "Şehir" dropdown'ına tıkla
-   const sehirDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').first();
-   await sehirDropdown.click();
-
-   // "ADANA" seçeneğini seç
-   const adanaOption = page.getByRole('option', { name: 'ADANA' });
-   await adanaOption.click();
-
-    // "İlçe" dropdown'ına tıkla
-   const ilceDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'İlçe' }).locator('span').first();
-   await ilceDropdown.click();
-
-   // "Kozan" seçeneğini seç
-   const kozanOption = page.getByRole('option', { name: 'KOZAN' });
-   await kozanOption.click();
-   
-    // "Mahalle" dropdown'ına tıkla
-    const mahalleDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Mahalle' }).locator('span').first();
-    await mahalleDropdown.click();
- 
-    // "Akkaya Mahallesi" seçeneğini seç
-    const akkayaOption = page.getByRole('option', { name: 'AKKAYA MAH.' });
-    await akkayaOption.click();
-
-    // "Adres" alanına yaz
-    const adresInput = page.locator('ot-address-contact-entry').getByRole('textbox');
-    await adresInput.fill('Adres'); 
-
-    //E-Posta Adresi alanınlarına yaz
-    const uretilenEposta = ePostaUret();
-    console.log('Üretilen E-posta:', uretilenEposta);
+  //   let popupBulundu = false;
     
-    
-    // E-Posta Adresi alanlarına yaz
-    const ePostaInput1 = page.locator('ot-panel').filter({ hasText: 'Üye İşyeri Bilgisi' }).getByPlaceholder('ornek@ornek.com');
-    await ePostaInput1.fill(uretilenEposta);
+  //   // Her popup türünü kontrol et
+  //   for (const selector of popupSelectors) {
+  //     try {
+  //       const popup = page.locator(selector);
+  //       const gorunurMu = await popup.isVisible({ timeout: 1000 });
+  //       if (gorunurMu) {
+  //         console.log(`🔍 Popup tespit edildi: ${selector}`);
+  //         popupBulundu = true;
+          
+  //                    // Popup içeriğini oku
+  //          const popupText = await popup.textContent();
+  //          if (popupText) {
+  //            console.log('📋 Popup İçeriği:', popupText.trim());
+  //          }
+           
+  //          // Başarı mesajlarını kontrol et
+  //          const basariKelimeleri = ['başarılı', 'başarıyla', 'success', 'tamamlandı'];
+  //          const icerikKucuk = popupText ? popupText.toLowerCase() : '';
+          
+  //         if (basariKelimeleri.some(kelime => icerikKucuk.includes(kelime))) {
+  //           console.log('✅ Başarılı: Ödeme Aracısı başarıyla eklendi!');
+  //         } else {
+  //           // Hata mesajlarını kontrol et
+  //           const hataKelimeleri = ['hata', 'error', 'uyarı', 'warning', 'mevcut', 'zaten'];
+  //           if (hataKelimeleri.some(kelime => icerikKucuk.includes(kelime))) {
+  //             console.log('❌ Hata/uyarı mesajı tespit edildi');
+  //           } else {
+  //             console.log('❓ Belirsiz popup mesajı');
+  //           }
+  //         }
+          
+  //         // Popup'ı kapat
+  //         const kapatButton = popup.locator('.swal2-confirm, .swal2-cancel, .btn-close, [aria-label="Close"], .close');
+  //         const kapatVarMi = await kapatButton.isVisible();
+  //         if (kapatVarMi) {
+  //           await kapatButton.click();
+  //           await page.waitForTimeout(500);
+  //         }
+          
+  //         break;
+  //       }
+  //     } catch (e) {
+  //       continue;
+  //     }
+  //   }
 
+  //   if (!popupBulundu) {
+  //     console.log('❓ Popup tespit edilemedi, sayfa mesajları kontrol ediliyor...');
+      
+  //     // Sayfada herhangi bir mesaj var mı kontrol et
+  //     const sayfaMesajSelectors = [
+  //       '.alert',
+  //       '.message', 
+  //       '.notification',
+  //       '.toast',
+  //       '[role="alert"]',
+  //       '.error',
+  //       '.success',
+  //       '.warning'
+  //     ];
+      
+  //     for (const selector of sayfaMesajSelectors) {
+  //       try {
+  //         const mesajlar = await page.locator(selector).all();
+  //         if (mesajlar.length > 0) {
+  //           for (const mesaj of mesajlar) {
+  //             const mesajText = await mesaj.textContent();
+  //             if (mesajText && mesajText.trim()) {
+  //               console.log(`📋 Sayfa Mesajı (${selector}):`, mesajText.trim());
+  //             }
+  //           }
+  //         }
+  //       } catch (e) {
+  //         continue;
+  //       }
+  //     }
+      
+  //     // Son çare: tüm sayfada "başarılı" veya "hata" kelimelerini ara
+  //     const sayfaIcerigi = await page.textContent('body');
+  //     if (sayfaIcerigi) {
+  //       const icerikKucuk = sayfaIcerigi.toLowerCase();
+  //       if (icerikKucuk.includes('başarılı') || icerikKucuk.includes('başarıyla')) {
+  //         console.log('✅ Sayfa içeriğinde başarı mesajı bulundu');
+  //       } else if (icerikKucuk.includes('hata') || icerikKucuk.includes('error')) {
+  //         console.log('❌ Sayfa içeriğinde hata mesajı bulundu');
+  //       }
+  //     }
+  //   }
 
-    // Telefon Numarası Üret
-    const uretilenTelNo = telNoUret();
-    console.log('Üretilen Telefon Numarası:', uretilenTelNo);
-    
-    // Telefon Numarası alanını yaz
-    const telNoInput1 = page.locator('ot-data-entry-template').filter({ hasText: 'Fatura Cep Telefonu' }).getByRole('textbox');
-    await telNoInput1.fill(uretilenTelNo);
+  // } catch (error) {
+  //   console.log('❌ Popup mesajı yakalanırken hata oluştu:', error.message);
+  // }
 
-
-    // Çevrim Dışı İşlem Limiti alanına 1000 yaz
-    const cevrimDisiIşlemLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı İşlem Limiti' }).getByRole('spinbutton');
-    await cevrimDisiIşlemLimiti.fill('1000');
-
-    // Çevrim Dışı Satış Limiti alanına 1000 yaz
-    const cevrimDisiSatisLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı Satış Limiti' }).getByRole('spinbutton');
-    await cevrimDisiSatisLimiti.fill('1000');
-
-    // Çevrim Dışı Gün Limiti alanına 1000 yaz
-    const cevrimDisiGunLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı Gün Limiti' }).getByRole('spinbutton');
-    await cevrimDisiGunLimiti.fill('1000');
-    
-
-     // üye işyeri admin kullanıcısı (işyeri adı ile aynı değeri verdik)
-    const adSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı'}).getByRole('textbox');
-    await adSoyadInput.fill(isyeriAdi);
-
-    // E-Posta Adresi alanına yaz
-    const ePostaInput2 = page.locator('ot-panel').filter({ hasText: 'Üye İşyeri Admin Kullanıcısı' }).getByPlaceholder('ornek@ornek.com');
-    await ePostaInput2.fill(uretilenEposta);
-
-    // Telefon Numarası alanına yaz
-    const telNoInput2 = page.locator('div').filter({ hasText: /^Telefon$/ }).getByRole('textbox');
-    await telNoInput2.fill(uretilenTelNo);
-
-
-         // Oluştur butonuna tıkla
-     const olusturButton2 = page.getByRole('button', { name: 'Oluştur' }).first();
-     await olusturButton2.click();
-
-     // Başarı mesajını kontrol et
-     try {
-       const basariMesaji = page.locator('.swal2-success-ring');
-       await basariMesaji.waitFor();
-      //  const elementSayisi = await basariMesaji.isVisible();
-      //  console.log('Element sayısı:', elementSayisi);
-       if (basariMesaji) {
-         console.log('✅ Başarılı: Üye İşyeri başarıyla eklendi!');
-       } else {
-         console.log('❌ Başarı mesajı bulunamadı');
-       }
-     } catch (error) {
-       console.log('❌ Başarı mesajı kontrol edilirken hata oluştu:', error.message);
-     }
-
-     // Test sonunda ekranın kapanmasını engellemek için pause
-    await page.pause();
+  // // Test sonunda ekranın kapanmasını engellemek için pause
+  // await page.pause();
 
 }); 
