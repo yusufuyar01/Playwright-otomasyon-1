@@ -66,3 +66,13 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 !!! 507/509 mükellef ekleme gerek duyulmadı
 !!! payment mediator (Ödeme Aracıları) uzun süreceğinden yapılmadı
+
+
+## Hazır otomasyon Komutları
+
+çnce proje dizinine gidiniz, sonra komutları çalıştırınız
+
+```bash
+npx playwright test tests/merchant/507-tuzel-mukellef-ekleme.spec.ts --headed
+507-tuzel-mukellef-ekleme.spec.ts
+```
