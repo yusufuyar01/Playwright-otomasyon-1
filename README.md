@@ -72,7 +72,16 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 çnce proje dizinine gidiniz, sonra komutları çalıştırınız
 
+
 ```bash
-npx playwright test tests/merchant/507-tuzel-mukellef-ekleme.spec.ts --headed
-507-tuzel-mukellef-ekleme.spec.ts
-```
+1-  npx playwright test tests/merchant/507-tuzel-mukellef-ekleme.spec.ts --headed
+
+2-  npx playwright test tests/merchant/507-gercek-mukellef-ekleme.spec.ts --headed
+
+3-  npx playwright test tests/merchant/509-tuzel-mukellef-ekleme.spec.ts --headed
+
+4-  npx playwright test tests/merchant/509-gercek-mukellef-ekleme.spec.ts --headed
+
+5-  npx playwright test tests/merchant/detay-payment-type-ekleme.spec.ts --headed
+
+6-  npx playwright test tests/merchant/detay-e-belge-ayarları.spec.ts --headed```
