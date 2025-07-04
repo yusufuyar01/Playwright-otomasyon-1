@@ -57,11 +57,13 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 /tests <br <br>>
     /merchant <br>
-    - `login.ts` : Her kod başında kullanılan giriş için.
-    - `zoom.ts` : Otomasyonun tıklayacağı elemanlar ekranda görünmesi gerekir. Ekranın boyutunu ayarlayabilmek için.
-    - `ePostaUret.ts` :E-posta üretimi için.
-    - `stringUret.ts` :Metin değerleri üretmek için.
-    - `tcknUret.ts` :Tcno üretimi için.
-    - `telNoUret.ts` :Telefon numarası üretimi için.
-    - `vknUret.ts` :Vergi No üretimi için.
+    - `507-tuzel-mukellef-ekleme.spec.ts` 
+    - `507-gercek-mukellef-ekleme.spec.ts` 
+    - `509-tuzel-mukellef-ekleme.spec.ts` 
+    - `509-gercek-mukellef-ekleme.spec.ts` 
+    - `detay-payment-type-ekleme.spec.ts` 
+    - `detay-e-belge-ekleme.spec.ts` 
+ 
 
+!!! 507/509 mükellef ekleme gerek duyulmadı
+!!! payment mediator (Ödeme Aracıları) uzun süreceğinden yapılmadı
