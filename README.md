@@ -41,6 +41,10 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 - Debug modunda çalıştır: `npx playwright test --debug`
 
 ---
-Türkçe açıklamalar ve örnekler ile geliştirmeye devam edebilirsiniz.
 
+## Dosyalar
+
+- `tests/` : Test dosyaları burada bulunur.
+- `tests-examples/` : Örnek testler.
+- `playwright.config.ts` : Playwright yapılandırma dosyası.
 

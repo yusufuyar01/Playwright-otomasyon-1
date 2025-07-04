@@ -34,39 +34,6 @@ test('Deneme', async ({ page }) => {
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
 
-
-  /*
-  // "ödeme tipleri" tıklama 
-  const odemeTipleri = page.getByText('Ödeme Tipleri');
-  await odemeTipleri.click();
-  await page.waitForTimeout(1000);
-
-  //"Yeni" butonu
-  const yeniButton = page.getByRole('button', { name: '+ Yeni' });
-  await yeniButton.click();
-  await page.waitForTimeout(1000);
-
-  // ===== ADIM 4: Ödeme Tipi Ekleme =====
-  // Ödeme Tipi dropdown'ına tıkla
-  const odemeTipiDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Ödeme Tipi' }).locator('span').first();
-  await odemeTipiDropdown.click();
-  await page.waitForTimeout(500);
-
-  // Kesin belirli bir seçenek seçemeyiz, kullanılmış bir seçenek yazılırsa dropdownda gözükmeyeceğinden seçme işlemi olmayacaktır. 
-  const options = await page.getByRole('option').all();
-  // Rastgele bir seçenek seç
-  const randomOption = options[Math.floor(Math.random() * options.length)]; 
-  await randomOption.click();
-  await page.waitForTimeout(500);
-
-  // "Oluştur" butonuna tıkla
-  const olusturButton = page.getByRole('button', { name: 'Oluştur' });
-  await olusturButton.click();
-  console.log('✅ Başarılı: Ödeme Tipi eklendi!');
-  await page.waitForTimeout(1000);
-
-  */
-
     // ===== ADIM 4: Ödeme Aracıları Ekleme =====
   // "ödeme Aracıları" tıklama 
   const odemeAracilari = page.getByText('Ödeme Aracıları');

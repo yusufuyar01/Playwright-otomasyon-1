@@ -6,7 +6,7 @@ import { ePostaUret } from '../../helpers/ePostaUret';
 import { telNoUret } from '../../helpers/telNoUret';
 import { zoom } from '../../helpers/zoom';
 
-test('Detay Menüye Eklemeler', async ({ page }) => {
+test('Detay Payment type Ekleme', async ({ page }) => {
 
   // Önce sisteme giriş yap
   await login(page);
@@ -27,8 +27,8 @@ test('Detay Menüye Eklemeler', async ({ page }) => {
   await page.waitForTimeout(500);
 
   // ===== ADIM 3: Detay Menü =====
-  // Detay menüye tıkla tıkla (ilk satır)
-  const firstRowExpand = page.locator('tr').nth(1).locator('.k-hierarchy-cell').first();
+  // Detay menüye tıkla tıkla (ilk 10 satırdan rastgele seç)
+  const firstRowExpand = page.locator(`tr:nth-child(${Math.floor(Math.random() * 10) + 1}) > .k-hierarchy-cell`);
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
 
