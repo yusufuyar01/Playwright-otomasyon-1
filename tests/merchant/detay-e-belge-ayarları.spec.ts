@@ -6,7 +6,7 @@ import { ePostaUret } from '../../helpers/ePostaUret';
 import { telNoUret } from '../../helpers/telNoUret';
 import { zoom } from '../../helpers/zoom';
 
-test('Detay E-Belge Ekleme', async ({ page }) => {
+test('Detay E-Belge Ayarları', async ({ page }) => {
 
   // Önce sisteme giriş yap
   await login(page);
