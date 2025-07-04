@@ -55,8 +55,8 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 - `vknUret.ts` :Vergi No üretimi için.
 
 
-/tests
-    /merchant
+/tests <br <br>>
+    /merchant <br>
     - `login.ts` : Her kod başında kullanılan giriş için.
     - `zoom.ts` : Otomasyonun tıklayacağı elemanlar ekranda görünmesi gerekir. Ekranın boyutunu ayarlayabilmek için.
     - `ePostaUret.ts` :E-posta üretimi için.
