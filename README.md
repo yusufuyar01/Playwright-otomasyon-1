@@ -88,7 +88,6 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 7-  npx playwright test tests/merchant/detay-entegrator-ekleme.spec.ts --headed
 
-7-  npx playwright test tests/merchant/detay-belge-ekleme-guncelleme-gosterme-silme.spec.ts --headed
-
+8-  npx playwright test tests/merchant/detay-belge-ekleme-guncelleme-goruntuleme-silme.spec.ts --headed
 
 ```
