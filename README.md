@@ -84,4 +84,11 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 5-  npx playwright test tests/merchant/detay-payment-type-ekleme.spec.ts --headed
 
-6-  npx playwright test tests/merchant/detay-e-belge-ayarları.spec.ts --headed```
+6-  npx playwright test tests/merchant/detay-e-belge-ayarları.spec.ts --headed
+
+7-  npx playwright test tests/merchant/detay-entegrator-ekleme.spec.ts --headed
+
+7-  npx playwright test tests/merchant/detay-belge-ekleme-guncelleme-gosterme-silme.spec.ts --headed
+
+
+```
