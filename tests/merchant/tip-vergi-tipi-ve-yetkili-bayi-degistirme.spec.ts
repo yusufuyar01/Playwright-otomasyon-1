@@ -7,7 +7,7 @@ import { ePostaUret } from '../../helpers/ePostaUret';
 import { telNoUret } from '../../helpers/telNoUret';
 import { zoom } from '../../helpers/zoom';
 
-test('Vergi Tipi ve Tip Değiştirme', async ({ page }) => {
+test('Tip, Vergi Tipi ve Yetkili bayi Değiştirme', async ({ page }) => {
 
   // Önce sisteme giriş yap
   await login(page);

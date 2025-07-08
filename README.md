@@ -90,6 +90,6 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 8-  npx playwright test tests/merchant/detay-belge-ekleme-guncelleme-goruntuleme-silme.spec.ts --headed
 
-9-  npx playwright test tests/merchant/vergi-tipi-ve-tip-degistirme.spec.ts --headed
+9-  npx playwright test tests/merchant/tip-vergi-tipi-ve-yetkili-bayi-degistirme.spec.ts --headed
     
 ```
