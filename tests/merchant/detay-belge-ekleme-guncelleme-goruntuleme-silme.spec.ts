@@ -30,12 +30,12 @@ test('Detay Belge Ekleme, Güncelleme, Görüntüleme ve Silme', async ({ page }
 
   
   // Detay menüye tıkla (ilk 10 satırdan rastgele seç)
-//   const randomRowNumber = Math.floor(Math.random() * 10) + 2;
-//   console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber}`);
-//   const firstRowExpand = page.locator(`tr:nth-child(${randomRowNumber}) > .k-hierarchy-cell`);
+  const randomRowNumber = Math.floor(Math.random() * 10) + 2;
+  console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber}`);
+  const firstRowExpand = page.locator(`tr:nth-child(${randomRowNumber}) > .k-hierarchy-cell`);
 
   // bu satır özellikle bir detay satırını incelemek için konulmuştur. hemen yukarıdaki 3 satırı yorum satırına alarak kullanabilirsiniz.
-  const firstRowExpand = page.locator('tr:nth-child(2) > .k-hierarchy-cell');
+  // const firstRowExpand = page.locator('tr:nth-child(5) > .k-hierarchy-cell');
   await firstRowExpand.click();
 
   // "Belgeler" tıklama 
@@ -73,8 +73,9 @@ test('Detay Belge Ekleme, Güncelleme, Görüntüleme ve Silme', async ({ page }
         } catch (error) {
             console.log('⚠️ Belge ekleme işlemi tamamlanamadı olabilir.');
         }
+        await page.waitForTimeout(2000);
         
-      } else if (!await page.getByRole('button', { name: '+ Yeni' }).isVisible()) {
+      } 
         console.log('✅ "Güncelle" butonu görünüyor, belge güncelleme, goruntuleme, silme yapılıyor...');
         
         // Tabpanel içindeki ilk hücreyi seç
@@ -132,7 +133,7 @@ test('Detay Belge Ekleme, Güncelleme, Görüntüleme ve Silme', async ({ page }
 
         console.log('✅ Silme işlemi yapıldı');
 
-      } 
+      
   
   await page.pause();
 
