@@ -32,8 +32,12 @@ test('Vergi Tipi ve Tip Değiştirme', async ({ page }) => {
   const randomRowNumber = Math.floor(Math.random() * 10) + 2;
   console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
   const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(randomRowNumber);
+
+
+  // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(1);
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
+
 
   // ===== ADIM 4: Vergi Tipi değiştirme =====
 
@@ -93,7 +97,29 @@ test('Vergi Tipi ve Tip Değiştirme', async ({ page }) => {
     await page.getByRole('option').getByText('507-Mükellefi').click();
   }
 
-  // ===== ADIM 5: Güncelle butonuna tıkla =====
+
+
+  // ===== ADIM 5: Yetkili bayi ekleme veya güncelleme =====
+  
+  // Aypara PF Test dropdown'ını bul ve tıkla
+  const ayparaDropdown = page.getByRole('combobox').getByLabel('Select').nth(6);
+  await ayparaDropdown.click();
+  await page.waitForTimeout(500);
+
+  // Açılan dropdown'dan rastgele seçim yap
+  const dropdownOptions = page.getByRole('option');
+  const optionCount = await dropdownOptions.count();
+  
+  if (optionCount > 0) {
+    const randomOptionIndex = Math.floor(Math.random() * optionCount);
+    console.log(`🎯 Dropdown'dan rastgele seçilen seçenek indeksi: ${randomOptionIndex + 1}`);
+    await dropdownOptions.nth(randomOptionIndex).click();
+    await page.waitForTimeout(500);
+  } else {
+    console.log('⚠️ Dropdown\'da seçenek bulunamadı');
+  }
+
+  // ===== ADIM 6: Güncelle butonuna tıkla =====
   await page.getByRole('button', { name: 'Güncelle' }).click();
   
 
