@@ -28,59 +28,6 @@ test('Deneme', async ({ page }) => {
   await uyeIsyeri.click();
   await page.waitForTimeout(500);
 
-  // ===== ADIM 3: Detay Menü =====
-  // Detay menüye tıkla tıkla (ilk satır)
-  const firstRowExpand = page.locator('tr').nth(1).locator('.k-hierarchy-cell').first();
-  await firstRowExpand.click();
-  await page.waitForTimeout(1000);
-
-    // ===== ADIM 4: Ödeme Aracıları Ekleme =====
-  // "ödeme Aracıları" tıklama 
-  const odemeAracilari = page.getByText('Ödeme Aracıları');
-  await odemeAracilari.click();
-  await page.waitForTimeout(1000);
-
-  //"Yeni" butonu
-  const yeniButton = page.getByRole('button', { name: '+ Yeni' });
-  await yeniButton.click();
-  await page.waitForTimeout(1000);  
-
-  // "Terminal tipi" seçimi
-  const terminalTipi = page.locator('ot-data-entry-template').filter({ hasText: 'Terminal Tipi' }).locator('span').first();
-  await terminalTipi.click();
-  await page.waitForTimeout(500);
-
-  // Rastgele bir seçenek seç
-  const options2 = await page.getByRole('option').all();
-  const randomOption2 = options2[Math.floor(Math.random() * options2.length)];
-  await randomOption2.click();
-  await page.waitForTimeout(500);
-
-  // // "POS" seçeneğini seç
-  // const posOption = page.getByRole('option', { name: 'POS' });
-  // await posOption.click();
-  // await page.waitForTimeout(500);
-
-  // "Ödeme Aracısı" seçimi
-  const odemeAracisi = page.locator('ot-data-entry-template').filter({ hasText: 'Ödeme Aracısı' }).locator('span').first();
-  await odemeAracisi.click();
-  await page.waitForTimeout(500);
-
-  // Rastgele bir seçenek seç
-  const options3 = await page.getByRole('option').all();
-  const randomOption3 = options3[Math.floor(Math.random() * options3.length)];
-  await randomOption3.click();
-  await page.waitForTimeout(500);
-
-  // Textbox'a tıkla ve "1234" yaz
-  const textbox = page.getByRole('textbox');
-  await textbox.click();
-  await textbox.fill('1234');
-  await page.waitForTimeout(500);
-
-  // "Oluştur" butonuna tıkla
-  const olusturButton = page.getByRole('button', { name: 'Oluştur' });
-  await olusturButton.click();
 
   // // Popup mesajlarını yakalamak için gelişmiş sistem
   // console.log('🔍 Popup mesajı aranıyor...');
@@ -192,6 +139,6 @@ test('Deneme', async ({ page }) => {
   // }
 
   // // Test sonunda ekranın kapanmasını engellemek için pause
-  // await page.pause();
+  await page.pause();
 
 }); 
