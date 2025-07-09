@@ -38,7 +38,6 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
   console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
   const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(randomRowNumber);
 
-
   // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(1);
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
@@ -49,18 +48,79 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
   // Ana iletişim seç
   await page.getByText('Adres Tipi seçiniz...').click();
 
-  const options = page.getByRole('option').all();
-  console.log(options);
+  
+  // 3 elemanlı veri kümesi
+  const dataSet = ['Adres', 'Telefon', 'Web'];
+  
+  // Veri kümesinden rastgele seç
+  const randomIndex = Math.floor(Math.random() * dataSet.length);
+  const selectedOption = dataSet[randomIndex];
+  console.log(`🎯 Ana iletişim seçilen: ${selectedOption}`);
+
+  // Seçilen Seçeneğe Tıkla
+  if (selectedOption) {
+    await page.getByRole('option', { name: selectedOption }).click();
+  } else {
+    console.log('❌ Seçenek metni bulunamadı');
+    return;
+  }
+  await page.waitForTimeout(1000);
+
+    if (selectedOption == 'Adres') {
+        // Adrese özel işlemler
+        // Alt kontak tipi
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Alt Kontak Tipi' }).locator('span').nth(1).click();
+        await page.getByRole('option', { name: 'Posta Adresi' }).click();
+
+        // Ülke
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Ülke' }).locator('span').nth(1).click();
+        await page.getByRole('searchbox', { name: 'Filter' }).fill('tü');
+        await page.getByRole('option', { name: 'Türkiye' }).click();
+
+        // şehir
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').nth(1).click();
+        await page.getByRole('option', { name: 'ADANA' }).click();
+
+        // ilçe
+        await page.locator('ot-data-entry-template').filter({ hasText: 'İlçe/Semt/Bölge' }).locator('span').nth(1).click();
+        await page.getByRole('option', { name: 'KOZAN' }).click();
+
+        // mahalle
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Mahalle' }).locator('span').nth(1).click();
+        await page.getByRole('option', { name: 'AKKAYA MAH.' }).click();
+
+        // Adres metni
+        const adresMetni = rastgeleString(10);
+        await page.getByRole('textbox').fill(adresMetni);
+
+    } else if (selectedOption == 'Telefon') {
+        // Telefon özel işlemler
+         // Alt kontak tipi
+         await page.locator('ot-phone-contact-entry span').nth(1).click();
+         await page.getByRole('option', { name: 'Telefon', exact: true }).click();
+        
+         // telefon No
+         const telefonNo = telNoUret();
+         await page.getByRole('textbox').fill(telefonNo);
+ 
+    } else if (selectedOption == 'Web') {
+        // Web özel işlemler
+        // Alt kontak tipi
+        await page.locator('ot-web-contact-entry span').nth(1).click();
+        await page.getByRole('option', { name: 'Web Sitesi' }).click();
+
+        // adres
+        const adres = rastgeleString(10);
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Adres' }).getByRole('textbox').fill(adres);
+
+    } else {
+      console.log('Bilinmeyen adres tipi:', selectedOption);
+    }
 
 
-
-
-
-
-
-
-
-  // Kaydet
+/*
+  // Kaydet butonunu bul ve tıkla
+  const kaydetButton = page.getByRole('button', { name: 'Kaydet' });
   await kaydetButton.click();
   await page.waitForTimeout(2000);
 
@@ -82,7 +142,7 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
   const telefonSatiri = page.locator('table tbody tr').filter({ hasText: yeniTelefon });
   await expect(telefonSatiri).toBeVisible();
   console.log('✅ Eklenen telefon numarası tabloda görünür');
-
+*/
   // Test sonunda ekranın kapanmasını engellemek için pause
   await page.pause();
 
