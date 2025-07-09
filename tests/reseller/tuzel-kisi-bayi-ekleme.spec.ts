@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../../helpers/login';
-import { tcknUret } from '../../helpers/tcknUret';
+import { vknUret } from '../../helpers/vknUret';
 import { rastgeleString } from '../../helpers/stringUret';
 import { ePostaUret } from '../../helpers/ePostaUret';
 import { telNoUret } from '../../helpers/telNoUret';
 import { zoom } from '../../helpers/zoom';
 
-test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
+test('Tüzel Kişi Bayi Ekleme', async ({ page }) => {
   
   // Önce sisteme giriş yap
   await login(page);
@@ -22,7 +22,7 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
 
   // ===== ADIM 2: Bayi Menüsüne Tıklama =====
   // Bayi menü linkini bul ve tıkla
-  const bayi = page.getByRole('link', { name: ' Bayi' }); 
+  const bayi = page.getByRole('link', { name: ' Bayi' }); 
   await bayi.click();
   await page.waitForTimeout(500);
 
@@ -34,13 +34,14 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
 
   // ===== ADIM 4: Bayi Ekleme Formu Doldurulması =====
 
-  // Vergi Tipi seçimi
+// Vergi Tipi seçimi
   const taxType = page.getByRole('dialog').getByText('Tüzel');
   await taxType.click();
 
   // Gerçek kullanıcı seç
-  const taxTypeOption = page.getByRole('option', { name: 'Gerçek' });
+  const taxTypeOption = page.getByRole('option', { name: 'Tüzel' });
   await taxTypeOption.click();
+
 
   // ===== ADIM 5: Bayi adı girilmesi =====
   // bayi adı üret ve gir
@@ -51,39 +52,53 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
   const bayiAdiInput = page.locator('ot-data-entry-template').filter({ hasText: 'Bayi Adı' }).getByRole('textbox');
   await bayiAdiInput.fill(bayiAdi);
 
-  // ===== ADIM 6: TCKN doldurulması =====
-   // TC No üret
-   const tckn = await tcknUret(page);
-   console.log('Üretilen TC No:', tckn);
+  // ===== ADIM 5: Vergi Dairesi Seçimi =====
+  // Kendo searchbar combobox'ına tıkla
+  const vergiDairesiCombobox = page.locator('kendo-searchbar').getByRole('combobox');
+  await vergiDairesiCombobox.click();
+
+
+  // "başkent" yaz
+  await vergiDairesiCombobox.fill('başkent');
+  await page.waitForTimeout(500);
+
+  // "Başkent Vergi Dairesi" seçeneğine tıkla
+  const baskVergiDairesi = page.getByRole('option', { name: 'Başkent Vergi Dairesi' });
+  await baskVergiDairesi.click();
+
+  // ===== ADIM 6: VKN doldurulması =====
+  // VKN üret
+  const vkn = await vknUret(page);
+  console.log('Üretilen VKN:', vkn);
   
-   // TC No alanına yaz
-   const tcknInput = page.locator('ot-alpha-entry').filter({ hasText: 'TCKN'}).getByRole('textbox');
-   await tcknInput.fill(tckn);
+  // VKN alanına yaz
+  const vknInput = page.locator('ot-alpha-entry').filter({ hasText: 'VKN'}).getByRole('textbox');
+  await vknInput.fill(vkn);
 
-   // "Tercih Edilen Dil" dropdown'ına tıkla
-   const tercihEdilenDil = page.locator('ot-data-entry-template').filter({ hasText: 'Tercih Edilen Dil' }).getByLabel('Select');
-   await tercihEdilenDil.click();
+  // "Tercih Edilen Dil" dropdown'ına tıkla
+  const tercihEdilenDil = page.locator('ot-data-entry-template').filter({ hasText: 'Tercih Edilen Dil' }).getByLabel('Select');
+  await tercihEdilenDil.click();
 
-   // "Türkçe" seçeneğini seç
-   const turkceOption = page.getByRole('option', { name: 'Türkçe' });
-   await turkceOption.click();
+  // "Türkçe" seçeneğini seç
+  const turkceOption = page.getByRole('option', { name: 'Türkçe' });
+  await turkceOption.click();
 
-   // "Şehir" dropdown'ına tıkla
- const sehirDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').first();
- await sehirDropdown.click();
+  // "Şehir" dropdown'ına tıkla
+  const sehirDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').first();
+  await sehirDropdown.click();
 
- // "ADANA" seçeneğini seç
- const adanaOption = page.getByRole('option', { name: 'ADANA' });
- await adanaOption.click();
+  // "ADANA" seçeneğini seç
+  const adanaOption = page.getByRole('option', { name: 'ADANA' });
+  await adanaOption.click();
 
   // "İlçe" dropdown'ına tıkla
- const ilceDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'İlçe' }).locator('span').first();
- await ilceDropdown.click();
+  const ilceDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'İlçe' }).locator('span').first();
+  await ilceDropdown.click();
 
- // "Kozan" seçeneğini seç
- const kozanOption = page.getByRole('option', { name: 'KOZAN' });
- await kozanOption.click();
- 
+  // "Kozan" seçeneğini seç
+  const kozanOption = page.getByRole('option', { name: 'KOZAN' });
+  await kozanOption.click();
+  
   // "Mahalle" dropdown'ına tıkla
   const mahalleDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Mahalle' }).locator('span').first();
   await mahalleDropdown.click();
@@ -115,17 +130,17 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
   await telNoInput1.fill(uretilenTelNo);
 
 
-   // üye işyeri admin kullanıcısı (bayi ile aynı değeri verdik)
-   const adSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı'}).getByRole('textbox');
-   await adSoyadInput.fill(bayiAdi);
+  // üye işyeri admin kullanıcısı (bayi ile aynı değeri verdik)
+  const adSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı'}).getByRole('textbox');
+  await adSoyadInput.fill(bayiAdi);
 
-   // E-Posta Adresi alanına yaz
-   const ePostaInput2 = page.locator('ot-panel').filter({ hasText: 'Bayi Admin KullanıcısıAdı' }).getByPlaceholder('ornek@ornek.com');
-   await ePostaInput2.fill(uretilenEposta);
+  // E-Posta Adresi alanına yaz
+  const ePostaInput2 = page.locator('ot-panel').filter({ hasText: 'Bayi Admin KullanıcısıAdı' }).getByPlaceholder('ornek@ornek.com');
+  await ePostaInput2.fill(uretilenEposta);
 
-   // Telefon Numarası alanına yaz
-   const telNoInput2 = page.locator('ot-data-entry-template').filter({ hasText: 'Telefon Numarası' }).getByRole('textbox');
-   await telNoInput2.fill(uretilenTelNo);
+  // Telefon Numarası alanına yaz
+  const telNoInput2 = page.locator('ot-data-entry-template').filter({ hasText: 'Telefon Numarası' }).getByRole('textbox');
+  await telNoInput2.fill(uretilenTelNo);
 
 
   // Oluştur butonuna tıkla
@@ -136,10 +151,11 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
   try {
     // Oluştur butonunun artık görünür olmadığını bekle
     await olusturButton.waitFor({ state: 'hidden', timeout: 5000 });
-    console.log('✅ Başarılı: Bayi başarıyla eklendi! (Gerçek Kişi)');
+    console.log('✅ Başarılı: Bayi başarıyla eklendi! (Tüzel Kişi)');
   } catch (error) {
     console.log('❌ Başarı mesajı kontrol edilirken hata oluştu:', error.message);
   }
+
   // Test sonunda ekranın kapanmasını engellemek için pause
   await page.pause();
 
