@@ -113,6 +113,8 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 11- npx playwright test tests/reseller/tuzel-kisi-bayi-ekleme.spec.ts --headed
 
+12- npx playwright test tests/reseller/tuzel-kisi-bayi-ekleme.spec.ts --headed
+
 
 
     npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
