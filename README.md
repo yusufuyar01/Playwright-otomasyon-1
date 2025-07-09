@@ -101,7 +101,7 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 5-  npx playwright test tests/merchant/detay-payment-type-ekleme.spec.ts --headed
 
-6-  npx playwright test tests/merchant/detay-e-belge-ayarları.spec.ts --headed
+6-  npx playwright test tests/merchant/detay-e-belge-ayarlari.spec.ts --headed
 
 7-  npx playwright test tests/merchant/detay-entegrator-ekleme.spec.ts --headed
 
@@ -117,6 +117,8 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 11- npx playwright test tests/reseller/tuzel-kisi-bayi-ekleme.spec.ts --headed
 
 12- npx playwright test tests/reseller/bayi-guncelle.spec.ts --headed
+
+13- npx playwright test tests/reseller/detay-iletisim-bilgileri-ekleme-guncelleme.spec.ts --headed
 
 
     npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
