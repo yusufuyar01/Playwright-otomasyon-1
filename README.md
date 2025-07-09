@@ -21,7 +21,10 @@ Bu komut, proje için gereken tüm paketleri node_modules klasörüne yükler.
 Playwright son sürüm Yükle
 
 ```bash
+
 npm install playwright@latest
+npx playwright install
+
 ```
 
 ## Test komutlarının çalıştırılması
