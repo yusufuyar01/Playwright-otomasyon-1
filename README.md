@@ -4,15 +4,27 @@ Bu proje, Playwright kullanarak web uygulamalarının otomatik regresyon testler
 
 ## Başlangıç
 
-Projeyi çalıştırmak için aşağıdaki komutları kullanabilirsiniz:
+İlk olarak bilgisayarında Node.js yüklü olmalı. Kurulu değilse LTS (uzun vadeli destek) sürümünü indirip kur.
 
 ```bash
-npx playwright test 
+node -v
+npm -v
 ```
 
-Bu komut projeyi genel çalıştırır(önerilmez). Daha fazla bilgi için [Playwright dokümantasyonuna](https://playwright.dev/docs/intro) göz atabilirsiniz.
+İkinci olarak proje dizinine git ve roje klasörünün içinde şu komutu çalıştır:
 
-## 
+```bash
+npm install
+```
+Bu komut, proje için gereken tüm paketleri node_modules klasörüne yükler.
+
+Playwright son sürüm Yükle
+
+```bash
+npm install playwright@latest
+```
+
+## Test komutlarının çalıştırılması
 
 
 ```bash
@@ -92,4 +104,11 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 9-  npx playwright test tests/merchant/tip-vergi-tipi-ve-yetkili-bayi-degistirme.spec.ts --headed
     
+10- npx playwright test tests/reseller/gercek-kisi-bayi-ekleme.spec.ts --headed
+
+
+
+    npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
+
+
 ```
