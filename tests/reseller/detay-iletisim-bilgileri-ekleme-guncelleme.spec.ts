@@ -34,11 +34,11 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
   // ===== ADIM 4: Detay Butonuna Tıklama =====
   // ===== ADIM 3: Değişikliklerin yapılacağı üye işyeri seçimi (rastgele) =====
   // ilk 8 satırdan rastgele seç
-  const randomRowNumber = Math.floor(Math.random() * 10) + 2;
-  console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
-  const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(randomRowNumber);
+//   const randomRowNumber = Math.floor(Math.random() * 10) + 2;
+//   console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
+//   const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(randomRowNumber);
 
-  // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(1);
+  const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(1);
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
 
@@ -118,6 +118,12 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
     }
 
 
+
+
+    // ===== ADIM 5: Güncelleme İşlemi =====
+      // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(randomRowNumber);
+      // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(1);
+      
 /*
   // Kaydet butonunu bul ve tıkla
   const kaydetButton = page.getByRole('button', { name: 'Kaydet' });
