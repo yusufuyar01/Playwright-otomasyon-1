@@ -60,77 +60,29 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
    const tcknInput = page.locator('ot-alpha-entry').filter({ hasText: 'TCKN'}).getByRole('textbox');
    await tcknInput.fill(tckn);
 
-  // ===== ADIM 7: Vergi Dairesi Seçimi =====
-  // "Başkent Vergi Dairesi" seçeneğine tıkla
-  const baskVergiDairesi = page.getByText('Başkent Vergi Dairesi');
-  await baskVergiDairesi.click();
+   // "Tercih Edilen Dil" dropdown'ına tıkla
+   const tercihEdilenDil = page.locator('ot-data-entry-template').filter({ hasText: 'Tercih Edilen Dil' }).getByLabel('Select');
+   await tercihEdilenDil.click();
 
- 
+   // "Türkçe" seçeneğini seç
+   const turkceOption = page.getByRole('option', { name: 'Türkçe' });
+   await turkceOption.click();
 
-  // Gerçek kişi adı, soyadı ve bayi kısa adı
-  const ad = rastgeleString(10);
-  const adInput = page.locator('ot-data-entry-template').filter({ hasText: /^Ad$/ }).getByRole('textbox');
-  await adInput.fill(ad);
-  
-  const soyadInput = page.locator('div').filter({ hasText: /^Soyad$/ }).getByRole('textbox');
-  await soyadInput.fill(ad);
-  
-  const bayiKisaAdiInput = page.locator('ot-data-entry-template').filter({ hasText: 'Bayi Kısa Ad'}).getByRole('textbox');
-  await bayiKisaAdiInput.fill(ad);
+   // "Şehir" dropdown'ına tıkla
+ const sehirDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').first();
+ await sehirDropdown.click();
 
-  // Fatura başlığı alanına yaz
-  const faturaBasligi = page.locator('ot-data-entry-template').filter({ hasText: 'Fatura Başlığı'}).getByRole('textbox');
-  await faturaBasligi.fill(ad);
-
-  // "Sektör" tıkla
-  const sektorDropdown = page.getByText('Seçiniz...').first();
-  await sektorDropdown.click();
-
-  // "DENEME" seçeneğini seç
-  const denemeOption = page.getByRole('option', { name: 'DENEME' });
-  await denemeOption.click();
-
-  // "Durum" dropdown'ına tıkla
-  const durumDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Durum' }).locator('span').first();
-  await durumDropdown.click();
-
-  // "Başlangıç" seçeneğini seç
-  const baslangicOption = page.getByRole('option', { name: 'Başlangıç' });
-  await baslangicOption.click();
-
-  // "Tercih Edilen Dil" dropdown'ına tıkla
-  const tercihEdilenDil = page.locator('ot-data-entry-template').filter({ hasText: 'Tercih Edilen Dil' }).locator('span').nth(1);
-  await tercihEdilenDil.click();
-
-  // "Türkçe" seçeneğini seç
-  const turkceOption = page.getByRole('option', { name: 'Türkçe' });
-  await turkceOption.click();
-
-  // "Entegratör" dropdown'ına tıkla
-  const entegratorDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Entegratör' }).locator('span').nth(1);
-  await entegratorDropdown.click();
-  await page.waitForTimeout(500);
-
-  // "Pavo Finansal Teknoloji Çözümleri A.Ş." seçeneğini seç
-  const pavoFinansalTeknolojiOption = page.getByRole('option', { name: 'Pavo Finansal Teknoloji Çözümleri A.Ş.' });
-  await pavoFinansalTeknolojiOption.click(); 
-  await page.waitForTimeout(500);
-
-  // "Şehir" dropdown'ına tıkla
-  const sehirDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Şehir' }).locator('span').first();
-  await sehirDropdown.click();
-
-  // "ADANA" seçeneğini seç
-  const adanaOption = page.getByRole('option', { name: 'ADANA' });
-  await adanaOption.click();
+ // "ADANA" seçeneğini seç
+ const adanaOption = page.getByRole('option', { name: 'ADANA' });
+ await adanaOption.click();
 
   // "İlçe" dropdown'ına tıkla
-  const ilceDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'İlçe' }).locator('span').first();
-  await ilceDropdown.click();
+ const ilceDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'İlçe' }).locator('span').first();
+ await ilceDropdown.click();
 
-  // "Kozan" seçeneğini seç
-  const kozanOption = page.getByRole('option', { name: 'KOZAN' });
-  await kozanOption.click();
+ // "Kozan" seçeneğini seç
+ const kozanOption = page.getByRole('option', { name: 'KOZAN' });
+ await kozanOption.click();
  
   // "Mahalle" dropdown'ına tıkla
   const mahalleDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Mahalle' }).locator('span').first();
@@ -144,13 +96,15 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
   const adresInput = page.locator('ot-address-contact-entry').getByRole('textbox');
   await adresInput.fill('Adres'); 
 
-  // E-Posta Adresi üret ve yaz
+  //E-Posta Adresi alanınlarına yaz
   const uretilenEposta = ePostaUret();
   console.log('Üretilen E-posta:', uretilenEposta);
   
-  // E-Posta Adresi alanına yaz
-  const ePostaInput1 = page.locator('ot-panel').filter({ hasText: 'Bayi Bilgisi' }).getByPlaceholder('ornek@ornek.com');
+  
+  // E-Posta Adresi alanlarına yaz
+  const ePostaInput1 = page.locator('ot-data-entry-template').filter({ hasText: 'Fatura E-Posta Adresi' }).getByPlaceholder('ornek@ornek.com');
   await ePostaInput1.fill(uretilenEposta);
+
 
   // Telefon Numarası Üret
   const uretilenTelNo = telNoUret();
@@ -160,29 +114,19 @@ test('Gerçek Kişi Bayi Ekleme', async ({ page }) => {
   const telNoInput1 = page.locator('ot-data-entry-template').filter({ hasText: 'Fatura Cep Telefonu' }).getByRole('textbox');
   await telNoInput1.fill(uretilenTelNo);
 
-  // Çevrim Dışı İşlem Limiti alanına 1000 yaz
-  const cevrimDisiIşlemLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı İşlem Limiti' }).getByRole('spinbutton');
-  await cevrimDisiIşlemLimiti.fill('1000');
 
-  // Çevrim Dışı Satış Limiti alanına 1000 yaz
-  const cevrimDisiSatisLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı Satış Limiti' }).getByRole('spinbutton');
-  await cevrimDisiSatisLimiti.fill('1000');
+   // üye işyeri admin kullanıcısı (bayi ile aynı değeri verdik)
+   const adSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı'}).getByRole('textbox');
+   await adSoyadInput.fill(bayiAdi);
 
-  // Çevrim Dışı Gün Limiti alanına 1000 yaz
-  const cevrimDisiGunLimiti = page.locator('ot-data-entry-template').filter({ hasText: 'Çevrim Dışı Gün Limiti' }).getByRole('spinbutton');
-  await cevrimDisiGunLimiti.fill('1000');
+   // E-Posta Adresi alanına yaz
+   const ePostaInput2 = page.locator('ot-panel').filter({ hasText: 'Bayi Admin KullanıcısıAdı' }).getByPlaceholder('ornek@ornek.com');
+   await ePostaInput2.fill(uretilenEposta);
 
-  // Bayi admin kullanıcısı (bayi adı ile aynı değeri verdik)
-  const adSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı'}).getByRole('textbox');
-  await adSoyadInput.fill(ad);
+   // Telefon Numarası alanına yaz
+   const telNoInput2 = page.locator('ot-data-entry-template').filter({ hasText: 'Telefon Numarası' }).getByRole('textbox');
+   await telNoInput2.fill(uretilenTelNo);
 
-  // E-Posta Adresi alanına yaz
-  const ePostaInput2 = page.locator('ot-panel').filter({ hasText: 'Bayi Admin Kullanıcısı' }).getByPlaceholder('ornek@ornek.com');
-  await ePostaInput2.fill(uretilenEposta);
-
-  // Telefon Numarası alanına yaz
-  const telNoInput2 = page.locator('ot-data-entry-template').filter({ hasText: 'Telefon Numarası' }).getByRole('textbox');
-  await telNoInput2.fill(uretilenTelNo);
 
   // Oluştur butonuna tıkla
   const olusturButton = page.getByRole('button', { name: 'Oluştur' }).first();

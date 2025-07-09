@@ -86,6 +86,8 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 
 ```bash
+
+/merchant
 1-  npx playwright test tests/merchant/507-tuzel-mukellef-ekleme.spec.ts --headed
 
 2-  npx playwright test tests/merchant/507-gercek-mukellef-ekleme.spec.ts --headed
@@ -103,6 +105,9 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 8-  npx playwright test tests/merchant/detay-belge-ekleme-guncelleme-goruntuleme-silme.spec.ts --headed
 
 9-  npx playwright test tests/merchant/tip-vergi-tipi-ve-yetkili-bayi-degistirme.spec.ts --headed
+
+
+/reseller
     
 10- npx playwright test tests/reseller/gercek-kisi-bayi-ekleme.spec.ts --headed
 
