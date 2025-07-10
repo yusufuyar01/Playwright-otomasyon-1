@@ -128,7 +128,7 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 /device
 
-15-
+15- npx playwright test tests/device/bayiye-atanmamis-ve-uye-isyerine-atanmamis.spec.ts --headed
 
     npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
 
