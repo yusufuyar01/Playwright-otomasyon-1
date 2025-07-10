@@ -120,6 +120,9 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 13- npx playwright test tests/reseller/detay-iletisim-bilgileri-ekleme-guncelleme.spec.ts --headed
 
+14- npx playwright test tests/reseller/detay-kullanici-ekleme-guncelleme.spec.ts --headed
+
+
 
     npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
 
