@@ -34,13 +34,14 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
   // ===== ADIM 4: Detay Butonuna Tıklama =====
   // ===== ADIM 3: Değişikliklerin yapılacağı üye işyeri seçimi (rastgele) =====
   // ilk 8 satırdan rastgele seç
-//   const randomRowNumber = Math.floor(Math.random() * 10) + 2;
-//   console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
-//   const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(randomRowNumber);
+  const randomRowNumber = Math.floor(Math.random() * 10) + 2;
+  console.log(`🎯 Rastgele seçilen satır numarası: ${randomRowNumber + 1}`);
+  const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(randomRowNumber);
 
-  const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(1);
+  // const firstRowExpand = page.locator('.k-hierarchy-cell.k-table-td').nth(1);
   await firstRowExpand.click();
   await page.waitForTimeout(1000);
+
 
   // yeni butonuna tıkla
   await page.getByRole('button', { name: '+ Yeni' }).click();
@@ -117,38 +118,67 @@ test('Detay İletişim Bilgileri Ekleme ve Güncelleme', async ({ page }) => {
       console.log('Bilinmeyen adres tipi:', selectedOption);
     }
 
+    // Oluştur butonuna tıkla
+    await page.getByRole('button', { name: 'Oluştur' }).click();
+    await page.waitForTimeout(1000);
+
+    try {
+      const basariMesaji = page.getByText('Başarılı Bayi İletişim başarı');
+      await basariMesaji.waitFor({ timeout: 5000 });
+      console.log('✅ Başarılı: İletişim bilgisi başarıyla eklendi!');
+    } catch (error) {
+      console.log('❌ İletişim bilgisi ekleme başarı mesajı kontrol edilirken hata oluştu:', error.message);
+    }
+
 
 
 
     // ===== ADIM 5: Güncelleme İşlemi =====
       // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(randomRowNumber);
-      // const firstRowExpand = page.getByRole('row', { name: /Expand Details/ }).getByRole('button').nth(1);
       
-/*
-  // Kaydet butonunu bul ve tıkla
-  const kaydetButton = page.getByRole('button', { name: 'Kaydet' });
-  await kaydetButton.click();
-  await page.waitForTimeout(2000);
+      // eklenen iletişim bilgisi listenin en üstüne geldiğinden 0 indexli güncelle butonuna tıkla
+      const bayiSatiri = page.getByLabel('İletişim Bilgileri').getByRole('gridcell', { name: '' }).nth(0);
+      await bayiSatiri.click();
+      await page.waitForTimeout(1000);
 
-  // Telefon ekleme başarı mesajını kontrol et
-  try {
-    const telefonBasariMesaji = page.locator('text="İletişim bilgisi başarıyla eklendi"');
-    await telefonBasariMesaji.waitFor({ timeout: 5000 });
-    console.log('✅ Başarılı: Telefon numarası başarıyla eklendi!');
-  } catch (error) {
-    console.log('❌ Telefon ekleme başarı mesajı kontrol edilirken hata oluştu:', error.message);
-  }
+      if (await page.locator('ot-dropdown-entry').filter({ hasText: 'Ana İletişimAdres' }).isVisible()) {
+        // Adrese güncelleme özel işlemler
+        // Adres metni
+        const adresMetni = rastgeleString(10);
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Adres' }).getByRole('textbox').fill(adresMetni);
+        console.log('Yeni adres:', adresMetni);
 
-  // ===== ADIM 13: Eklenen İletişim Bilgilerini Doğrulama =====
-  // Tabloda eklenen bilgilerin görünür olduğunu kontrol et
-  const guncelEpostaSatiri = page.locator('table tbody tr').filter({ hasText: guncelEposta });
-  await expect(guncelEpostaSatiri).toBeVisible();
-  console.log('✅ Güncellenmiş e-posta tabloda görünür');
+    } else if (await page.locator('ot-data-entry-template').filter({ hasText: 'Ana İletişimTelefon' }).isVisible()) {
+        // Telefon güncelleme özel işlemler
+        // telefon no
+         const telefonNo = telNoUret();
+         await page.getByRole('textbox').fill(telefonNo);
+         console.log('Yeni telefon:', telefonNo);
 
-  const telefonSatiri = page.locator('table tbody tr').filter({ hasText: yeniTelefon });
-  await expect(telefonSatiri).toBeVisible();
-  console.log('✅ Eklenen telefon numarası tabloda görünür');
-*/
+    } else if (await page.locator('ot-dropdown-entry').filter({ hasText: 'Ana İletişimWeb' }).isVisible()) {
+        // Web güncelleme özel işlemler
+        // adres
+        const adres = rastgeleString(10);
+        await page.locator('ot-data-entry-template').filter({ hasText: 'Adres' }).getByRole('textbox').fill(adres);
+        console.log('Yeni web adresi:', adres);
+    } 
+
+
+      // güncelle butonuna tıkla
+      await page.getByRole('button', { name: 'Güncelle' }).click();
+      await page.waitForTimeout(1000);
+
+
+      try {
+        const basariMesaji = page.getByText('Başarılı Bayi İletişim başarı');
+        await basariMesaji.waitFor({ timeout: 5000 });
+        console.log('✅ Başarılı: İletişim bilgisi başarıyla güncellendi!');
+      } catch (error) {
+        console.log('❌ İletişim bilgisi güncelleme başarı mesajı kontrol edilirken hata oluştu:', error.message);
+      }
+    
+
+
   // Test sonunda ekranın kapanmasını engellemek için pause
   await page.pause();
 
