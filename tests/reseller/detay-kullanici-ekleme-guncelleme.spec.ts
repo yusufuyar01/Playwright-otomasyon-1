@@ -77,85 +77,66 @@ test('Detay Kullanıcı Ekleme ve Güncelleme', async ({ page }) => {
     await page.getByRole('combobox').filter({ hasText: /^$/ }).click();
     await page.getByRole('option').first().click();
 
-    /*
+    
     // oluştur butonuna tıkla
     await page.getByRole('button', { name: 'Oluştur' }).click();
     await page.waitForTimeout(1000);
 
     try {
-      const basariMesaji = page.getByText('Başarılı Bayi kullanıcısı baş');
+      const basariMesaji = page.getByText('Başarılı Bayi kullanıcısı başarıyla oluşturuldu');
       await basariMesaji.waitFor({ timeout: 5000 });
       console.log('✅ Başarılı: Kullanıcı başarıyla eklendi!');
     } catch (error) {
       console.log('❌ Kullanıcı ekleme başarı mesajı kontrol edilirken hata oluştu:', error.message);
     }
-  */
-
-    
-    
-    
-
-
-
-
-
-   /*
 
 
   // ===== ADIM 7: Kullanıcı Güncelleme İşlemi =====
   // Eklenen kullanıcının güncelle butonuna tıkla (en üstte olacak)
-  const guncelleButton = page.getByLabel('Kullanıcılar').getByRole('gridcell', { name: ' ' }).nth(0);
-  await guncelleButton.click();
+  await page.getByLabel('Kullanıcılar').getByRole('button', { name: '' }).first().click();
   await page.waitForTimeout(1000);
 
-  // ===== ADIM 8: Kullanıcı Bilgilerini Güncelleme =====
+
   
   // Ad Soyad güncelle
-  const yeniAdSoyad = rastgeleString(10);
-  console.log('Güncellenen Ad Soyad:', yeniAdSoyad);
-  const yeniAdSoyadInput = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı' }).getByRole('textbox');
-  await yeniAdSoyadInput.clear();
-  await yeniAdSoyadInput.fill(yeniAdSoyad);
+  const adSoyad2 = rastgeleString(10);
+  console.log('Güncellenen Ad Soyad:', adSoyad2);
+  const adSoyadInput2 = page.locator('ot-data-entry-template').filter({ hasText: 'Adı Soyadı' }).getByRole('textbox');
+  await adSoyadInput2.fill(adSoyad2);
+  console.log('Ad Soyad güncellendi:', adSoyad2);
 
   // E-posta güncelle
-  const yeniEposta = ePostaUret();
-  console.log('Güncellenen E-posta:', yeniEposta);
-  const yeniEpostaInput = page.locator('ot-data-entry-template').filter({ hasText: 'E-Posta Adresi' }).getByPlaceholder('ornek@ornek.com');
-  await yeniEpostaInput.clear();
-  await yeniEpostaInput.fill(yeniEposta);
+  const ePosta2 = ePostaUret();
+  console.log('Güncellenen E-posta:', ePosta2);
+  const ePostaInput2 = page.getByRole('textbox', { name: 'ornek@ornek.com' });
+  await ePostaInput2.fill(ePosta2);
+  console.log('E-posta güncellendi:', ePosta2);
 
   // Telefon Numarası güncelle
-  const yeniTelNo = telNoUret();
-  console.log('Güncellenen Telefon Numarası:', yeniTelNo);
-  const yeniTelNoInput = page.locator('ot-data-entry-template').filter({ hasText: 'Telefon Numarası' }).getByRole('textbox');
-  await yeniTelNoInput.clear();
-  await yeniTelNoInput.fill(yeniTelNo);
+  const telNo2 = telNoUret();
+  console.log('Güncellenen Telefon Numarası:', telNo2);
+  const telNoInput = page.locator('kendo-maskedtextbox').getByRole('textbox');
+  await telNoInput.fill(telNo2);
+  console.log('Telefon Numarası güncellendi:', telNo2);
 
-  // Kullanıcı Tipi güncelle
-  const yeniKullaniciTipi = page.locator('ot-data-entry-template').filter({ hasText: 'Kullanıcı Tipi' }).getByLabel('Select');
-  await yeniKullaniciTipi.click();
-  await page.getByRole('option', { name: 'Kullanıcı' }).click();
 
-  // Rol güncelle
-  const yeniRolDropdown = page.locator('ot-data-entry-template').filter({ hasText: 'Rol' }).getByLabel('Select');
-  await yeniRolDropdown.click();
-  await page.getByRole('option', { name: 'Bayi Kullanıcı' }).click();
-
-  // ===== ADIM 9: Güncelleme İşlemini Tamamlama =====
   // Güncelle butonuna tıkla
-  const guncelleButtonFinal = page.getByRole('button', { name: 'Güncelle' });
-  await guncelleButtonFinal.click();
+  await page.getByRole('button', { name: 'Güncelle' }).click();
+  await page.waitForTimeout(1000);
+
+  // evet butonuna tıkla
+  await page.getByRole('button', { name: 'Evet' }).click();
   await page.waitForTimeout(1000);
 
   // Güncelleme başarı mesajını kontrol et
   try {
-    const guncellemeBasariMesaji = page.getByText('Başarılı Kullanıcı başarı');
+    const guncellemeBasariMesaji = page.getByText('Başarılı Bayi kullanıcısı başarıyla güncellendi');
     await guncellemeBasariMesaji.waitFor({ timeout: 5000 });
     console.log('✅ Başarılı: Kullanıcı başarıyla güncellendi!');
   } catch (error) {
     console.log('❌ Kullanıcı güncelleme başarı mesajı kontrol edilirken hata oluştu:', error.message);
   }
-  */
+  
 
   // Test sonunda ekranın kapanmasını engellemek için pause
   await page.pause();
