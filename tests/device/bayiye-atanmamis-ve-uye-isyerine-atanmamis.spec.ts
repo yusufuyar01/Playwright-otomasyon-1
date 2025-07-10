@@ -55,6 +55,7 @@ test('Bayiye Atanmamış ve Üye İşyerine Atanmamış Cihazları Test Etme', a
 
     // Bayiye atanmamış cihazları filtrelemeyi kaldır(Saddece üye işyerine atanmamış cihazları filtrelemek için gerekli)
     await bayiyeAtanmamisCheckbox.click();
+    await page.waitForTimeout(2000);
     
   } catch (error) {
     console.log('⚠️ Bayiye atanmamış filtresi bulunamadı');
@@ -73,7 +74,7 @@ test('Bayiye Atanmamış ve Üye İşyerine Atanmamış Cihazları Test Etme', a
     const uyeBosMuDizisi: boolean[] = [];
 
     for (let i = 1; i <= 10; i++) {
-        const selector = `tr:nth-child(${i}) > td:nth-child(6)`; // Üye işyeri bilgisi genellikle 6. sütunda olur
+        const selector = `tr:nth-child(${i}) > td:nth-child(8)`; // Üye işyeri bilgisi genellikle 8. sütunda olur
         const cell = page.locator(selector);
         const cellText = await cell.textContent();
 
@@ -109,7 +110,7 @@ test('Bayiye Atanmamış ve Üye İşyerine Atanmamış Cihazları Test Etme', a
 
     for (let i = 1; i <= 10; i++) {
         const bayiSelector = `tr:nth-child(${i}) > td:nth-child(5)`; // Bayi bilgisi 5. sütunda
-        const uyeSelector = `tr:nth-child(${i}) > td:nth-child(6)`; // Üye işyeri bilgisi 6. sütunda
+        const uyeSelector = `tr:nth-child(${i}) > td:nth-child(8)`; // Üye işyeri bilgisi 8. sütunda
         
         const bayiCell = page.locator(bayiSelector);
         const uyeCell = page.locator(uyeSelector);
