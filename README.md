@@ -82,6 +82,9 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 !!! 507/509 mükellef ekleme gerek duyulmadı
 !!! payment mediator (Ödeme Aracıları) uzun süreceğinden yapılmadı
 !!! bayi ekranındaki grid filter kontrolü için otomasyona gerek duyulmadı
+!!! Cihaz yönetimi ekranındaki excel export için otomasyona yapılamadı.
+!!! Cihaz yönetimi ekranındaki grid filter kontrolü için otomasyona gerek duyulmadı
+
 
 
 
@@ -129,6 +132,13 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 /device
 
 15- npx playwright test tests/device/bayiye-atanmamis-ve-uye-isyerine-atanmamis.spec.ts --headed
+
+16- npx playwright test tests/device/yeni-cihaz-ekle.spec.ts --headed
+
+17- 
+
+18- 
+
 
     npx playwright codegen https://overpayresellerdemo.overtech.com.tr/Home/Dashboard/Index
 
