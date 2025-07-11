@@ -30,7 +30,7 @@ test('Yeni Cihaz Ekleme', async ({ page }) => {
 
   // ===== ADIM 4: Cihaz Ekleme Formu Doldurulması =====
   // Cihaz Seri No üret ve gir
-  const cihazSeriNo = "PAVDENEME" + rastgeleString(5);
+  const cihazSeriNo = ("PAVDENEME" + rastgeleString(5)).toUpperCase();
   console.log('Üretilen Cihaz Seri No:', cihazSeriNo);
   const seriNoInput = page.locator('ot-data-entry-template').filter({ hasText: 'Seri Numarası' }).getByRole('textbox');
   await seriNoInput.fill(cihazSeriNo);

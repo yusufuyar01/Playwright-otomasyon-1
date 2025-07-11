@@ -135,7 +135,7 @@ Yazılan bağlantıyı bir pencerede açar ve otomasyon için gerekli olan locat
 
 16- npx playwright test tests/device/yeni-cihaz-ekle.spec.ts --headed
 
-17- 
+17- npx playwright test tests/device/cihaz-guncelle.spec.ts --headed
 
 18- 
 
